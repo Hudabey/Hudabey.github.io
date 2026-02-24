@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - Hudeifa Hassan</title>
+  <meta name="description" content="Hudeifa Hassan's blog">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <a href="index.html" class="nav-brand">hudeifa hassan</a>
+      <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">
+        &#9776;
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">home</a></li>
+        <li><a href="research.html">research</a></li>
+        <li><a href="blog.html" class="active">blog</a></li>
+        <li><a href="#">cv</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <section class="hero" style="margin-bottom: 48px;">
+      <h1>Blog</h1>
+      <p class="tagline">Thoughts, notes, and deep dives</p>
+    </section>
+
+    <section>
+      <div class="blog-list">
+
+        <div class="blog-item">
+          <div>
+            <h3><a href="blog/post-1.html">Your First Blog Post Title</a></h3>
+            <p>A short description of what this post covers and why it matters.</p>
+          </div>
+          <span class="blog-date">2025-01-15</span>
+        </div>
+
+        <div class="blog-item">
+          <div>
+            <h3><a href="blog/post-2.html">Another Interesting Post</a></h3>
+            <p>Brief summary of the second blog post and its key takeaway.</p>
+          </div>
+          <span class="blog-date">2024-12-01</span>
+        </div>
+
+        <div class="blog-item">
+          <div>
+            <h3><a href="#">Thoughts on Topic X</a></h3>
+            <p>Some reflections on a topic you find interesting or a technical deep dive.</p>
+          </div>
+          <span class="blog-date">2024-11-10</span>
+        </div>
+
+        <div class="blog-item">
+          <div>
+            <h3><a href="#">Notes on Learning Y</a></h3>
+            <p>What you learned while studying a new concept or technology.</p>
+          </div>
+          <span class="blog-date">2024-10-05</span>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Hudeifa Hassan</p>
+      <p><a href="#">&uarr; top</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
