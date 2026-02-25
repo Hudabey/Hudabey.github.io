@@ -41,77 +41,76 @@
       <div class="research-list">
 
         <div class="research-item">
-          <h3><a href="#">Project Title One</a></h3>
-          <div class="research-meta">2025 &middot; Ongoing</div>
+          <div class="research-item-header">
+            <h3>AR Video Generation Inference Profiling</h3>
+            <span class="status-badge active">&#9679; active</span>
+          </div>
           <p>
-            Describe your current research project here. What's the problem?
-            What's your approach? What results have you seen so far?
+            End-to-end latency and memory profiling of MAGI-1 and SkyReels-V2
+            across 2s&ndash;30s video lengths. Decomposing time into text encoding,
+            autoregressive chunk denoising, attention/feedforward/normalization,
+            KV cache ops, and VAE decoding. Looking for non-linear scaling and
+            bottlenecks that current work misses.
           </p>
           <div class="research-tags">
-            <span class="tag">Machine Learning</span>
-            <span class="tag">Systems</span>
-          </div>
-          <div class="research-links">
-            <a href="#">Code</a>
+            <span class="tag">AR Video</span>
+            <span class="tag">MAGI-1</span>
+            <span class="tag">SkyReels-V2</span>
+            <span class="tag">H100</span>
+            <span class="tag">torch.profiler</span>
           </div>
         </div>
 
         <div class="research-item">
-          <h3><a href="#">Project Title Two</a></h3>
-          <div class="research-meta">2025 &middot; Ongoing</div>
-          <p>
-            Another active research effort. Include collaborators, lab,
-            or advisor information if relevant.
-          </p>
-          <div class="research-tags">
-            <span class="tag">Deep Learning</span>
-            <span class="tag">Computer Vision</span>
+          <div class="research-item-header">
+            <h3>Quantization Robustness in Distilled Diffusion Models</h3>
+            <span class="status-badge active">&#9679; active</span>
           </div>
-          <div class="research-links">
-            <a href="#">Paper</a>
-            <a href="#">Code</a>
+          <p>
+            Why do different distillation methods respond so differently to INT8
+            quantization? Running controlled ablations with SageAttention across
+            rCM, LCM, and Turbo.
+          </p>
+          <div class="key-finding">
+            &rarr; rCM maintains quality under INT8 while LCM and Turbo degrade
+            significantly &mdash; distillation method choice has direct deployment
+            implications
+          </div>
+          <div class="research-tags">
+            <span class="tag">INT8</span>
+            <span class="tag">rCM</span>
+            <span class="tag">LCM</span>
+            <span class="tag">SageAttention</span>
+            <span class="tag">Consistency Models</span>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- Past Projects -->
+    <!-- Completed -->
     <section>
-      <h2 class="section-header">Past Projects</h2>
+      <h2 class="section-header">Completed</h2>
       <div class="research-list">
 
         <div class="research-item">
-          <h3><a href="#">Project Title Three</a></h3>
-          <div class="research-meta">2024</div>
+          <div class="research-item-header">
+            <h3>TurboDiffusion Ablation Study</h3>
+            <span class="status-badge done">done</span>
+          </div>
           <p>
-            A completed project. Describe the outcome, contributions,
-            and where it was published or presented.
+            Systematic decomposition of TurboDiffusion's optimization stack.
+            Isolated each component's contribution to end-to-end speedup.
           </p>
+          <div class="key-finding">
+            &rarr; SLA alone = 2.80&times; DiT speedup (92% of total) &mdash; other
+            components marginal. Contradicts original paper's additive framing.
+          </div>
           <div class="research-tags">
-            <span class="tag">Optimization</span>
-            <span class="tag">GPU</span>
-          </div>
-          <div class="research-links">
-            <a href="#">Paper</a>
-            <a href="#">Code</a>
-            <a href="#">Demo</a>
-          </div>
-        </div>
-
-        <div class="research-item">
-          <h3><a href="#">Project Title Four</a></h3>
-          <div class="research-meta">2024</div>
-          <p>
-            Another completed research project or significant course project.
-          </p>
-          <div class="research-tags">
-            <span class="tag">Robotics</span>
-            <span class="tag">Reinforcement Learning</span>
-          </div>
-          <div class="research-links">
-            <a href="#">Code</a>
-            <a href="#">Video</a>
+            <span class="tag">DiT</span>
+            <span class="tag">Sparse Attention</span>
+            <span class="tag">Ablation</span>
+            <span class="tag">Benchmarking</span>
           </div>
         </div>
 
