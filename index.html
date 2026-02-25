@@ -34,16 +34,22 @@
     <!-- Bio / Hero -->
     <section class="hero">
       <h1>Hudeifa Hassan</h1>
-      <p class="tagline">Student &amp; Researcher</p>
+      <p class="tagline">CS Student @ SRH Berlin</p>
       <div class="bio">
         <p>
-          Hi, I'm Hudeifa. I'm a student interested in building things at the
-          intersection of systems and intelligence. Currently exploring research
-          in machine learning and systems engineering.
+          Hi, I'm Hudeifa. I'm a CS student at SRH Berlin working on efficient
+          inference for video generation models. My current focus is on
+          autoregressive video diffusion &mdash; understanding how these models
+          generate video frame-by-frame and finding ways to make that process
+          faster without sacrificing quality.
         </p>
         <p style="margin-top: 12px;">
-          I like working on hard problems and turning ideas into real software.
-          This site is where I share my research, projects, and thoughts.
+          Autoregressive generation is how the best video models work today,
+          but it's slow: each chunk of frames depends on the last, and temporal
+          attention across the full sequence is the main bottleneck. I'm
+          investigating sparse attention patterns, quantization, and
+          inference-time optimizations to make long-form video generation
+          practical.
         </p>
       </div>
 
@@ -141,10 +147,10 @@
       </div>
     </section>
 
-    <!-- Blog -->
+    <!-- Recent Posts -->
     <section>
-      <h2 class="section-header">Blog</h2>
-      <p class="tagline" style="margin-top: -16px;">Thoughts, notes, and deep dives</p>
+      <h2 class="section-header">Recent Posts</h2>
+      <p style="font-size: 14px; color: var(--fg-dim);">Nothing here yet. Check back soon.</p>
       <p style="margin-top: 16px;">
         <a href="blog.html" style="font-size: 14px; color: var(--fg-dim);">&rarr; read the blog</a>
       </p>
