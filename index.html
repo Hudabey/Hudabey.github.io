@@ -74,39 +74,64 @@
 
         <div class="research-item">
           <div class="research-item-header">
-            <h3>AR Video Generation Inference Profiling</h3>
-            <span class="status-badge active">&#9679; active</span>
+            <h3>Sparse Attention Patterns in Video Diffusion: Do They Preserve Semantic Consistency Across Frames?</h3>
+            <span class="status-badge active">&#9679; in progress</span>
           </div>
           <p>
-            End-to-end latency and memory profiling of MAGI-1 and SkyReels-V2
-            across 2s&ndash;30s video lengths. Decomposing time into text encoding,
-            autoregressive chunk denoising, attention/feedforward/normalization,
-            KV cache ops, and VAE decoding. Looking for non-linear scaling and
-            bottlenecks that current work misses.
+            Sparse and linear attention approximations reduce compute in spatial
+            dimensions, but video requires temporal attention for consistency.
+            We're probing whether existing sparse attention masks used for
+            efficiency inadvertently disrupt cross-frame token interactions, and
+            whether simple structured sparsity patterns &mdash; like attending to
+            the first frame plus a local window &mdash; can recover consistency at
+            lower cost. Directly relevant to autoregressive streaming pipelines
+            where full temporal attention is the main bottleneck.
           </p>
           <div class="research-tags">
-            <span class="tag">AR Video</span>
-            <span class="tag">MAGI-1</span>
-            <span class="tag">SkyReels-V2</span>
-            <span class="tag">H100</span>
-            <span class="tag">torch.profiler</span>
+            <span class="tag">Sparse Attention</span>
+            <span class="tag">Video Diffusion</span>
+            <span class="tag">Temporal Consistency</span>
+            <span class="tag">SLA</span>
+            <span class="tag">SageAttention</span>
           </div>
         </div>
 
         <div class="research-item">
           <div class="research-item-header">
-            <h3>Quantization Robustness in Distilled Diffusion Models</h3>
-            <span class="status-badge active">&#9679; active</span>
+            <h3>Temporal Attention Drift in Autoregressive Video Diffusion</h3>
+            <span class="status-badge active">&#9679; in progress</span>
           </div>
           <p>
-            Why do different distillation methods respond so differently to INT8
-            quantization? Running controlled ablations with SageAttention across
-            rCM, LCM, and Turbo.
+            As autoregressive video models generate longer sequences, how do
+            temporal attention patterns evolve? We're studying whether attention
+            to early frames dilutes over time and whether this directly causes
+            the quality degradation seen in long sequences. Testing whether
+            forced attention anchoring to keyframes can recover consistency
+            without retraining. Pure inference-time analysis &mdash; gives a
+            mechanistic explanation for what Long Live and Self-Forcing++ are
+            implicitly trying to fix.
+          </p>
+          <div class="research-tags">
+            <span class="tag">AR Video</span>
+            <span class="tag">Attention Drift</span>
+            <span class="tag">Keyframe Anchoring</span>
+            <span class="tag">Inference Analysis</span>
+          </div>
+        </div>
+
+        <div class="research-item">
+          <div class="research-item-header">
+            <h3>Quantization Robustness Across Diffusion Distillation Methods</h3>
+            <span class="status-badge active">&#9679; ongoing</span>
+          </div>
+          <p>
+            Investigating why different distillation paradigms respond differently
+            to INT8 quantization via SageAttention.
           </p>
           <div class="key-finding">
-            &rarr; rCM maintains quality under INT8 while LCM and Turbo degrade
-            significantly &mdash; distillation method choice has direct deployment
-            implications
+            &rarr; rCM maintains output quality under INT8 while LCM and Turbo
+            degrade significantly &mdash; distillation method choice has direct
+            deployment implications
           </div>
           <div class="research-tags">
             <span class="tag">INT8</span>
@@ -114,27 +139,6 @@
             <span class="tag">LCM</span>
             <span class="tag">SageAttention</span>
             <span class="tag">Consistency Models</span>
-          </div>
-        </div>
-
-        <div class="research-item">
-          <div class="research-item-header">
-            <h3>TurboDiffusion Ablation Study</h3>
-            <span class="status-badge done">done</span>
-          </div>
-          <p>
-            Systematic decomposition of TurboDiffusion's optimization stack.
-            Isolated each component's contribution to end-to-end speedup.
-          </p>
-          <div class="key-finding">
-            &rarr; SLA alone = 2.80&times; DiT speedup (92% of total) &mdash; other
-            components marginal. Contradicts original paper's additive framing.
-          </div>
-          <div class="research-tags">
-            <span class="tag">DiT</span>
-            <span class="tag">Sparse Attention</span>
-            <span class="tag">Ablation</span>
-            <span class="tag">Benchmarking</span>
           </div>
         </div>
 
