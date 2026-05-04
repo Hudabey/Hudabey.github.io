@@ -68,51 +68,19 @@
 
         <div class="research-item">
           <div class="research-item-header">
-            <h3>Sparse Attention Patterns in Video Diffusion: Do They Preserve Semantic Consistency Across Frames?</h3>
-            <span class="status-badge active">&#9679; in progress</span>
+            <h3>Efficient Video Diffusion</h3>
+            <span class="status-badge active">in progress</span>
           </div>
-          <p>
-            Sparse and linear attention approximations reduce compute in spatial
-            dimensions, but video requires temporal attention for consistency.
-            We're probing whether existing sparse attention masks used for
-            efficiency inadvertently disrupt cross-frame token interactions, and
-            whether simple structured sparsity patterns &mdash; like attending to
-            the first frame plus a local window &mdash; can recover consistency at
-            lower cost. Directly relevant to autoregressive streaming pipelines
-            where full temporal attention is the main bottleneck.
-          </p>
-          <div class="research-tags">
-            <span class="tag">Sparse Attention</span>
-            <span class="tag">Video Diffusion</span>
-            <span class="tag">Temporal Consistency</span>
-            <span class="tag">SLA</span>
-            <span class="tag">SageAttention</span>
-          </div>
+          <p>Sparse attention for long-context video generation.</p>
         </div>
 
         <div class="research-item">
           <div class="research-item-header">
-            <h3>Temporal Attention Drift in Autoregressive Video Diffusion</h3>
-            <span class="status-badge active">&#9679; in progress</span>
+            <h3>Autoregressive Video Generation</h3>
+            <span class="status-badge active">in progress</span>
           </div>
-          <p>
-            As autoregressive video models generate longer sequences, how do
-            temporal attention patterns evolve? We're studying whether attention
-            to early frames dilutes over time and whether this directly causes
-            the quality degradation seen in long sequences. Testing whether
-            forced attention anchoring to keyframes can recover consistency
-            without retraining. Pure inference-time analysis &mdash; gives a
-            mechanistic explanation for what Long Live and Self-Forcing++ are
-            implicitly trying to fix.
-          </p>
-          <div class="research-tags">
-            <span class="tag">AR Video</span>
-            <span class="tag">Attention Drift</span>
-            <span class="tag">Keyframe Anchoring</span>
-            <span class="tag">Inference Analysis</span>
-          </div>
+          <p>Temporal consistency in long sequences.</p>
         </div>
-
 
       </div>
     </section>

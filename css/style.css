@@ -202,18 +202,20 @@ section {
 .research-list {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 0;
 }
 
 .research-item {
-  padding: 20px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  transition: border-color var(--transition), background-color var(--transition);
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+  transition: background-color var(--transition);
+}
+
+.research-item:first-child {
+  border-top: 1px solid var(--border);
 }
 
 .research-item:hover {
-  border-color: #3f3f46;
   background-color: var(--bg-secondary);
 }
 
@@ -221,34 +223,38 @@ section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  gap: 16px;
+  margin-bottom: 6px;
 }
 
 .research-item h3 {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
+  letter-spacing: -0.01em;
   color: var(--fg);
 }
 
 .status-badge {
-  font-size: 12px;
-  padding: 3px 10px;
-  border-radius: 12px;
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 999px;
   font-weight: 500;
   white-space: nowrap;
   flex-shrink: 0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .status-badge.active {
-  background: rgba(74, 222, 128, 0.1);
-  color: var(--green);
-  border: 1px solid rgba(74, 222, 128, 0.3);
+  background: transparent;
+  color: var(--fg-dim);
+  border: 1px solid var(--border);
 }
 
 .status-badge.done {
-  background: rgba(250, 204, 21, 0.1);
-  color: var(--yellow);
-  border: 1px solid rgba(250, 204, 21, 0.3);
+  background: transparent;
+  color: var(--fg-dim);
+  border: 1px solid var(--border);
 }
 
 .key-finding {
