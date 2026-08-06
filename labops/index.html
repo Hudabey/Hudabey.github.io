@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LabOps — a relational database for GPU research-lab operations</title>
+  <meta name="description" content="Interactive presentation of LabOps: ER design, 3NF normalization, 13 verified query logics, and a live in-browser SQL demo.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,wght@0,500;1,400;1,500&display=swap" rel="stylesheet">
+</head>
+<body data-page="1">
+  <div class="progress"></div>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark"></span>
+        <span class="brand-text">LabOps <small>a relational DBMS for GPU research ops</small></span>
+      </a>
+      <nav class="dots"></nav>
+      <div class="counter"></div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <canvas id="hero-canvas" class="hero-canvas"></canvas>
+        <div class="hero-inner reveal">
+          <span class="eyebrow">Databases · Final Project · Live demo</span>
+          <h1 class="display"><span class="grad">LabOps.</span></h1>
+          <p class="sub">A relational database for GPU research-lab operations.</p>
+
+          <div class="hook">
+            Research moves faster than <span class="strike">spreadsheets</span> can track it.<br>
+            <span class="accent">A schema can — and it enforces the rules itself.</span>
+          </div>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="problem.html">Begin presentation <span class="arr">→</span></a>
+            <a class="btn btn-ghost" href="queries.html">Jump to live SQL</a>
+          </div>
+
+          <div class="meta-row">
+            <div><span class="dot"></span>Hudeifa Hassan · 100002025</div>
+            <div><span class="dot"></span>MySQL 9.7.1 · 9 tables · 3NF</div>
+            <div><span class="dot"></span>13 query logics — every statement verified</div>
+            <div><span class="dot"></span><span class="kbd">←</span> <span class="kbd">→</span> to navigate</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bottombar">
+      <a class="navbtn prev" href="#"><span>←</span><span class="label"><small></small><span class="title"></span></span></a>
+      <a class="navbtn next" href="#"><span class="label"><small></small><span class="title"></span></span><span>→</span></a>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

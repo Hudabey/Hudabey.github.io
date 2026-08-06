@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ER model — LabOps</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,wght@0,500;1,400;1,500&display=swap" rel="stylesheet">
+</head>
+<body data-page="3">
+  <div class="progress"></div>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark"></span>
+        <span class="brand-text">LabOps <small>a relational DBMS for GPU research ops</small></span>
+      </a>
+      <nav class="dots"></nav>
+      <div class="counter"></div>
+    </header>
+
+    <main>
+      <section class="page page-wide flex-page">
+        <div class="reveal">
+          <span class="eyebrow">03 · Database design</span>
+          <h1 style="margin-top:8px">The ER model — <span class="grad">Crow's Foot</span>, hover to explore.</h1>
+        </div>
+
+        <div class="er-layout reveal">
+          <div class="er-stage">
+            <svg id="er-svg" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid meet"></svg>
+          </div>
+          <div class="er-panel">
+            <div id="er-panel-body"></div>
+            <div class="card">
+              <div class="card-title">Legend</div>
+              <p style="font-size:12px;margin:4px 0"><span class="mono emerald">PK</span> primary key · <span class="mono cyan">FK</span> foreign key</p>
+              <p style="font-size:12px;margin:4px 0"><span class="mono">UQ</span> unique · <span class="mono">ENUM</span> closed vocabulary</p>
+              <p style="font-size:12px;margin:4px 0"><span class="mono">CHK</span> check · <span class="mono">DFT</span> default · <span class="mono">NULL✓</span> optional</p>
+              <p style="font-size:12px;margin:4px 0">crow's foot = many · double tick = exactly one</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bottombar">
+      <a class="navbtn prev" href="#"><span>←</span><span class="label"><small></small><span class="title"></span></span></a>
+      <a class="navbtn next" href="#"><span class="label"><small></small><span class="title"></span></span><span>→</span></a>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

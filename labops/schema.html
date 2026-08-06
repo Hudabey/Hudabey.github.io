@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Implementation — LabOps</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,wght@0,500;1,400;1,500&display=swap" rel="stylesheet">
+</head>
+<body data-page="5">
+  <div class="progress"></div>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark"></span>
+        <span class="brand-text">LabOps <small>a relational DBMS for GPU research ops</small></span>
+      </a>
+      <nav class="dots"></nav>
+      <div class="counter"></div>
+    </header>
+
+    <main>
+      <section class="page page-wide page-scroll">
+        <div class="reveal" style="display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap">
+          <div>
+            <span class="eyebrow">05 · Implementation</span>
+            <h1 style="margin-top:8px">Rules the engine <span class="grad">enforces itself.</span></h1>
+          </div>
+          <span class="badge engine hidden" id="engine-badge">SQLite loading…</span>
+        </div>
+        <p class="lead reveal" style="margin-top:6px">
+          Implemented on MySQL 9.7.1 with full referential integrity. This very page carries the same schema in an
+          embedded SQLite engine — the row counts below are being counted <b class="fg">live, right now</b>.
+        </p>
+
+        <div class="two-col reveal">
+          <div>
+            <ol class="steps">
+              <li><div><b>PRIMARY KEY</b><p>All nine tables; surrogate INT AUTO_INCREMENT; composite on run_claims doubles as M:N uniqueness.</p></div></li>
+              <li><div><b>FOREIGN KEY ×9</b><p>ON DELETE CASCADE from runs to metrics/checkpoints/run_claims; restrictive defaults protect master data — a node with runs cannot be deleted.</p></div></li>
+              <li><div><b>UNIQUE</b><p>researchers.email · projects.project_name · claims.claim_code · (run_id, metric_name).</p></div></li>
+              <li><div><b>CHECK</b><p>vram_gb &gt; 0 · hourly_usd ≥ 0 · duration_min &gt; 0 · size_gb &gt; 0 — domain sanity at the engine level.</p></div></li>
+              <li><div><b>NOT NULL · DEFAULT · ENUM</b><p>Only notes and evidence_note are optional; safe defaults (status 'RUNNING', verdict 'OPEN'); closed vocabularies via the type system.</p></div></li>
+            </ol>
+            <pre class="code sql" data-label="schema.sql — the hub table" style="margin-top:14px">CREATE TABLE experiment_runs (
+    run_id         INT           PRIMARY KEY AUTO_INCREMENT,
+    project_id     INT           NOT NULL,
+    node_id        INT           NOT NULL,
+    researcher_id  INT           NOT NULL,
+    run_label      VARCHAR(80)   NOT NULL,
+    started_at     DATETIME      NOT NULL,
+    duration_min   INT           NOT NULL,
+    status         ENUM('GREEN','MIXED','FAILED','RUNNING')
+                                 NOT NULL DEFAULT 'RUNNING',
+    notes          VARCHAR(255),
+    CONSTRAINT chk_duration CHECK (duration_min > 0),
+    CONSTRAINT fk_runs_project    FOREIGN KEY (project_id)
+        REFERENCES projects(project_id),
+    CONSTRAINT fk_runs_node       FOREIGN KEY (node_id)
+        REFERENCES gpu_nodes(node_id),
+    CONSTRAINT fk_runs_researcher FOREIGN KEY (researcher_id)
+        REFERENCES researchers(researcher_id)
+);</pre>
+          </div>
+          <div>
+            <div class="statrow" id="schema-stats"></div>
+            <div style="margin-top:14px">
+              <div class="card-title" style="margin-bottom:8px">Row counts — read live from the embedded database</div>
+              <div id="schema-live"><div class="muted mono" style="font-size:12px">loading engine…</div></div>
+            </div>
+            <div class="card" style="margin-top:14px">
+              <div class="card-title">Why the data is real</div>
+              <p style="font-size:13px">The sample data is the lab's actual 2026 research history — Helios-2, K3-Engineer, SLA-Ablation, SpecDec-AR, ReMass — so every query in the next slide answers a question the lab genuinely asks.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bottombar">
+      <a class="navbtn prev" href="#"><span>←</span><span class="label"><small></small><span class="title"></span></span></a>
+      <a class="navbtn next" href="#"><span class="label"><small></small><span class="title"></span></span><span>→</span></a>
+    </footer>
+  </div>
+  <script src="vendor/sql-wasm-b64.js"></script>
+  <script src="vendor/sql-wasm.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

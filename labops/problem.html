@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The problem — LabOps</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,wght@0,500;1,400;1,500&display=swap" rel="stylesheet">
+</head>
+<body data-page="2">
+  <div class="progress"></div>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark"></span>
+        <span class="brand-text">LabOps <small>a relational DBMS for GPU research ops</small></span>
+      </a>
+      <nav class="dots"></nav>
+      <div class="counter"></div>
+    </header>
+
+    <main>
+      <section class="page page-wide page-scroll">
+        <div class="reveal">
+          <span class="eyebrow">02 · Requirements analysis</span>
+          <h1 style="margin-top:10px">One lab. Six researchers. <span class="grad">Hundreds of runs.</span></h1>
+          <p class="lead">
+            The lab owns no hardware — it rents H100, A100 and RTX-4090-class nodes by the hour from RunPod, Lambda,
+            Vast.ai and CoreWeave. Every project advances through <b class="fg">experiment runs</b>: a researcher occupies
+            a node for a bounded time, the run produces named metrics and checkpoints, and its outcome bears on the
+            falsifiable claims the project tracks.
+          </p>
+        </div>
+
+        <div class="grid-4 reveal" style="margin-top:20px">
+          <div class="card">
+            <div class="card-title">Goal 1</div>
+            <h3 class="emerald">Cost visibility</h3>
+            <p>GPU rental is the dominant cost. Spend must be attributable per project, per node type, per time window — impossible when run logs live in scattered notebooks.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Goal 2</div>
+            <h3 class="cyan">Reproducibility</h3>
+            <p>Every metric and checkpoint must be traceable to the exact run, node, and researcher that produced it.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Goal 3</div>
+            <h3 class="amber">Scientific accounting</h3>
+            <p>Claims are the unit of research progress. Which runs support claim C5? Which claims are still open, and what would close them?</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Goal 4</div>
+            <h3 class="pink">Auditability</h3>
+            <p>Run status changes (RUNNING → GREEN/FAILED) must leave a trace no user can forget to write.</p>
+          </div>
+        </div>
+
+        <div class="grid-2 reveal" style="margin-top:20px">
+          <div class="card">
+            <div class="card-title">Users</div>
+            <p><b class="fg">Lab lead</b> — approves budgets, reads the per-project dashboard, tracks claim verdicts.</p>
+            <p><b class="fg">Researchers (PhD/MSc)</b> — register runs, record metrics and checkpoints, link runs to claims.</p>
+            <p><b class="fg">Research engineer</b> — manages node inventory and pricing, investigates failed runs, maintains the audit trail.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Business rules → the schema will enforce them</div>
+            <p style="font-size:13px">· A project has <b class="fg">exactly one</b> lead; a run belongs to <b class="fg">exactly one</b> project, node, and researcher.</p>
+            <p style="font-size:13px">· A metric name appears <b class="fg">once per run</b> (composite uniqueness).</p>
+            <p style="font-size:13px">· Runs ↔ claims is <b class="fg">many-to-many</b>, resolved by an associative entity that also stores the evidence note.</p>
+            <p style="font-size:13px">· Training runs need <b class="fg">≥ 40 GB VRAM</b> — enforced by a stored procedure.</p>
+            <p style="font-size:13px">· Every status change is recorded <b class="fg">automatically</b> — enforced by a trigger.</p>
+          </div>
+        </div>
+
+        <p class="reveal" style="margin-top:18px"><span class="tag emerald">The thesis</span>&nbsp;
+          Push the business rules into the database engine itself — constraints, a trigger, a transactional procedure —
+          rather than trusting application code. Rules in the engine are <b class="fg">unforgeable</b>.</p>
+      </section>
+    </main>
+
+    <footer class="bottombar">
+      <a class="navbtn prev" href="#"><span>←</span><span class="label"><small></small><span class="title"></span></span></a>
+      <a class="navbtn next" href="#"><span class="label"><small></small><span class="title"></span></span><span>→</span></a>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

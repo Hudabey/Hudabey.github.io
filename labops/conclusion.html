@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Takeaways — LabOps</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,wght@0,500;1,400;1,500&display=swap" rel="stylesheet">
+</head>
+<body data-page="10">
+  <div class="progress"></div>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark"></span>
+        <span class="brand-text">LabOps <small>a relational DBMS for GPU research ops</small></span>
+      </a>
+      <nav class="dots"></nav>
+      <div class="counter"></div>
+    </header>
+
+    <main>
+      <section class="page page-wide page-scroll">
+        <div class="reveal" style="margin-top:12px">
+          <span class="eyebrow">10 · Conclusions</span>
+          <div class="quote" style="margin-top:18px">Push the rules into the engine — <span class="accent">they become unforgeable.</span></div>
+        </div>
+
+        <div class="grid-3 reveal" style="margin-top:26px">
+          <div class="card">
+            <div class="card-title">Lesson 1</div>
+            <h3>Normalization is not academic</h3>
+            <p style="font-size:13px">The transitive dependency gpu_model → hourly_usd is exactly how real spend reports silently go wrong. 3NF made a price correction a single-row UPDATE.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Lesson 2</div>
+            <h3>The engine beats convention</h3>
+            <p style="font-size:13px">Constraints, the audit trigger, and the transactional procedure enforce business rules in a way team conventions never are — unforgeable, unforgettable.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Lesson 3</div>
+            <h3>Performance is a design property</h3>
+            <p style="font-size:13px">Indexes, narrow rows, and the partition-ready metric table were chosen against a concrete growth model of millions of rows — before they were needed.</p>
+          </div>
+        </div>
+
+        <div class="two-col reveal" style="margin-top:6px">
+          <div class="card">
+            <div class="card-title">Delivered &amp; verified</div>
+            <p style="font-size:13px">· 8-entity ER model in Crow's Foot · flat notebook normalised to 3NF</p>
+            <p style="font-size:13px">· MySQL 9.7.1 implementation: 9 FKs, CHECKs, ENUMs, UNIQUEs, defaults</p>
+            <p style="font-size:13px">· 13 query logics — every statement executed against a live instance</p>
+            <p style="font-size:13px">· Trigger-populated audit trail · atomic stored procedure · dashboard view</p>
+            <p style="font-size:13px">· ACID demonstrated on real calls · CAP argued per-workload</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Future work</div>
+            <p style="font-size:13px">· Automatic cost capture from provider billing APIs</p>
+            <p style="font-size:13px">· Per-step training metrics with partitioning from day one</p>
+            <p style="font-size:13px">· A small reporting layer over project_dashboard</p>
+            <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+              <span class="badge">every SQL statement verified</span>
+              <span class="badge engine" style="animation:none">this deck ran the schema live</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal center" style="margin-top:22px">
+          <a class="btn btn-primary" href="index.html">↺ back to start</a>
+          <a class="btn btn-ghost" href="queries.html">re-open the live console</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bottombar">
+      <a class="navbtn prev" href="#"><span>←</span><span class="label"><small></small><span class="title"></span></span></a>
+      <a class="navbtn next" href="#"><span class="label"><small></small><span class="title"></span></span><span>→</span></a>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

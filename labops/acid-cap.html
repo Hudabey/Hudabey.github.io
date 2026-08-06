@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACID &amp; CAP — LabOps</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,wght@0,500;1,400;1,500&display=swap" rel="stylesheet">
+</head>
+<body data-page="9">
+  <div class="progress"></div>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark"></span>
+        <span class="brand-text">LabOps <small>a relational DBMS for GPU research ops</small></span>
+      </a>
+      <nav class="dots"></nav>
+      <div class="counter"></div>
+    </header>
+
+    <main>
+      <section class="page page-wide page-scroll">
+        <div class="reveal">
+          <span class="eyebrow">09 · Guarantees</span>
+          <h1 style="margin-top:8px"><span class="grad">ACID</span> today — <span class="grad">CAP</span> when we grow.</h1>
+        </div>
+
+        <div class="grid-4 reveal" style="margin-top:18px">
+          <div class="card">
+            <div class="card-title">Atomicity</div>
+            <p style="font-size:13px">register_run() inserts a run and its first metric in one transaction. If the metric insert fails, the EXIT HANDLER rolls back the run insert. <b class="fg">Verified:</b> the rejected 24 GB-node call left the run count unchanged.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Consistency</div>
+            <p style="font-size:13px">Every commit moves the database between states satisfying all constraints: FK integrity, CHECK domains, ENUM vocabularies, and the VRAM rule raised via SIGNAL <b class="fg">before any write</b>.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Isolation</div>
+            <p style="font-size:13px">InnoDB's REPEATABLE READ: the lab lead's dashboard read sees a consistent snapshot even while a researcher commits new runs mid-query; concurrent register_run() calls serialise on the indexes without corrupting either insert.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Durability</div>
+            <p style="font-size:13px">With innodb_flush_log_at_trx_commit=1, a committed registration survives a crash of the host — essential when that row is the only record that a $3/hour node was occupied.</p>
+          </div>
+        </div>
+
+        <div class="two-col reveal" style="margin-top:8px">
+          <div class="card">
+            <div class="card-title">CAP — pick two (click)</div>
+            <div class="pillgroup" id="cap-pick" style="margin-bottom:12px">
+              <button data-cap="CA">C + A</button>
+              <button data-cap="CP">C + P</button>
+              <button data-cap="AP">A + P</button>
+            </div>
+            <p id="cap-out" style="font-size:13.5px"></p>
+          </div>
+          <div class="card">
+            <div class="card-title">The practical lesson</div>
+            <p style="font-size:13.5px">The moment a read replica is added for dashboards, a network partition forces a choice — and the right answer is <b class="fg">per-workload, not per-system</b>:</p>
+            <p style="font-size:13px">· <span class="tag green">AP</span>&nbsp; financial queries (Q3, Q10) — staleness acceptable for minutes.</p>
+            <p style="font-size:13px">· <span class="tag cyan">CP</span>&nbsp; audit trail &amp; claim verdicts — a wrong verdict read is worse than a delayed one.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bottombar">
+      <a class="navbtn prev" href="#"><span>←</span><span class="label"><small></small><span class="title"></span></span></a>
+      <a class="navbtn next" href="#"><span class="label"><small></small><span class="title"></span></span><span>→</span></a>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

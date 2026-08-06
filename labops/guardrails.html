@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guardrails — LabOps</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,wght@0,500;1,400;1,500&display=swap" rel="stylesheet">
+</head>
+<body data-page="7">
+  <div class="progress"></div>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark"></span>
+        <span class="brand-text">LabOps <small>a relational DBMS for GPU research ops</small></span>
+      </a>
+      <nav class="dots"></nav>
+      <div class="counter"></div>
+    </header>
+
+    <main>
+      <section class="page page-wide page-scroll">
+        <div class="reveal" style="display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap">
+          <div>
+            <span class="eyebrow">07 · Trigger &amp; stored procedure</span>
+            <h1 style="margin-top:8px">Rules no one can <span class="grad">forget to follow.</span></h1>
+          </div>
+          <span class="badge engine hidden" id="engine-badge">SQLite loading…</span>
+        </div>
+
+        <div class="two-col reveal">
+          <!-- TRIGGER -->
+          <div>
+            <h2>Q12 — the audit trigger <span class="tag emerald">live</span></h2>
+            <p style="font-size:13px">Every status transition must be traceable. <b class="fg">run_audit starts empty</b> — no INSERT statement in the whole project writes to it. Only the trigger can.</p>
+            <pre class="code sql" data-label="MySQL 9.7.1">CREATE TRIGGER trg_run_status_audit
+AFTER UPDATE ON experiment_runs
+FOR EACH ROW
+BEGIN
+    IF NEW.status <> OLD.status THEN
+        INSERT INTO run_audit (run_id, old_status, new_status)
+        VALUES (NEW.run_id, OLD.status, NEW.status);
+    END IF;
+END</pre>
+            <div class="card-title" style="margin:12px 0 6px">End-of-cycle triage — all five MIXED runs get their verdict</div>
+            <div id="trig-plan"></div>
+            <div class="runbar" style="margin-top:10px">
+              <button class="btn-mini" id="trig-run">▶ run the five UPDATEs</button>
+              <button class="btn-mini" id="trig-reset">↺ reset database</button>
+            </div>
+            <p class="runstat" id="trig-stat" style="margin:8px 0 6px"></p>
+            <div id="trig-out"></div>
+          </div>
+
+          <!-- PROCEDURE -->
+          <div>
+            <h2>Q13 — atomic run registration <span class="tag cyan">live</span></h2>
+            <p style="font-size:13px">A run may only be registered on a node with <b class="fg">≥ 40 GB VRAM</b>; the run and its first metric are inserted in <b class="fg">one transaction</b>. The EXIT HANDLER rolls back on any error — a half-registered run can never exist.</p>
+            <pre class="code sql" data-label="MySQL 9.7.1 — core logic">CREATE PROCEDURE register_run( ... )
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN  ROLLBACK;  RESIGNAL;  END;
+
+    SELECT vram_gb INTO v_vram FROM gpu_nodes
+    WHERE  node_id = p_node_id;
+    IF v_vram < 40 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT =
+          'Node has insufficient VRAM for a training run';
+    END IF;
+
+    START TRANSACTION;
+        INSERT INTO experiment_runs (...) VALUES (...);
+        INSERT INTO run_metrics
+        VALUES (LAST_INSERT_ID(), p_metric, p_value);
+    COMMIT;
+END</pre>
+            <div class="card" style="margin-top:12px">
+              <div class="card-title">Try it — pick a node, call the procedure</div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
+                <div class="numin" style="flex:1;min-width:180px">
+                  <label>node</label>
+                  <select class="console-in" style="min-height:0;padding:9px 12px" id="proc-node"></select>
+                </div>
+                <div class="numin" style="flex:1;min-width:150px">
+                  <label>run_label</label>
+                  <input id="proc-label" value="cap0-nll-recheck">
+                </div>
+                <button class="btn-mini" id="proc-run" style="height:38px">▶ CALL register_run</button>
+              </div>
+              <p class="runstat" id="proc-count" style="margin:10px 0 6px"></p>
+              <div id="proc-out"></div>
+            </div>
+            <p class="muted" style="font-size:12px">The 24 GB RTX 4090 is rejected by SIGNAL before any write — try it. Verified identically on MySQL: row count unchanged.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bottombar">
+      <a class="navbtn prev" href="#"><span>←</span><span class="label"><small></small><span class="title"></span></span></a>
+      <a class="navbtn next" href="#"><span class="label"><small></small><span class="title"></span></span><span>→</span></a>
+    </footer>
+  </div>
+  <script src="vendor/sql-wasm-b64.js"></script>
+  <script src="vendor/sql-wasm.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

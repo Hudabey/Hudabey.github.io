@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live queries — LabOps</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,wght@0,500;1,400;1,500&display=swap" rel="stylesheet">
+</head>
+<body data-page="6">
+  <div class="progress"></div>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark"></span>
+        <span class="brand-text">LabOps <small>a relational DBMS for GPU research ops</small></span>
+      </a>
+      <nav class="dots"></nav>
+      <div class="counter"></div>
+    </header>
+
+    <main>
+      <section class="page page-wide flex-page">
+        <div class="reveal" style="display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap">
+          <div>
+            <span class="eyebrow">06 · SQL query analysis</span>
+            <h1 style="margin-top:8px">Eleven query logics — <span class="grad">running live in this page.</span></h1>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <span class="badge">verified on MySQL 9.7.1</span>
+            <span class="badge engine hidden" id="engine-badge">SQLite loading…</span>
+          </div>
+        </div>
+
+        <div class="sqlrun reveal">
+          <nav class="qlist" id="qlist"></nav>
+          <div class="qdetail">
+            <div class="qq" id="q-question"></div>
+            <div class="runbar">
+              <button class="btn-mini" id="q-run">▶ run again</button>
+              <button class="btn-mini" id="q-reset">↺ reset database</button>
+              <span class="runstat" id="q-stat"></span>
+            </div>
+            <pre class="code" data-label="SQL" id="q-sql"></pre>
+            <div id="q-out"></div>
+            <p id="q-note" style="margin:0;font-size:13px"></p>
+            <hr class="sep">
+            <div class="card-title">Open console — ask the database anything</div>
+            <textarea class="console-in" id="console-in" spellcheck="false">SELECT full_name, lab_role, COUNT(r.run_id) AS runs
+FROM researchers s
+LEFT JOIN experiment_runs r ON r.researcher_id = s.researcher_id
+GROUP BY s.researcher_id ORDER BY runs DESC;</textarea>
+            <div class="runbar">
+              <button class="btn-mini" id="console-run">▶ execute</button>
+              <span class="runstat muted">free-form SQL against the live schema</span>
+            </div>
+            <div id="console-out"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bottombar">
+      <a class="navbtn prev" href="#"><span>←</span><span class="label"><small></small><span class="title"></span></span></a>
+      <a class="navbtn next" href="#"><span class="label"><small></small><span class="title"></span></span><span>→</span></a>
+    </footer>
+  </div>
+  <script src="vendor/sql-wasm-b64.js"></script>
+  <script src="vendor/sql-wasm.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
